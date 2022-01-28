@@ -1,3 +1,4 @@
+import { ReactElement } from "react";
 import { Thumbnails } from "../../models/thumbnails";
 
 export interface CardModel {
@@ -6,5 +7,6 @@ export interface CardModel {
   description: string;
   thumbnails: Thumbnails;
   rounded?: boolean;
-  overlay?: string;
+  overlay?: ReactElement;
+  extraContent?: ReactElement;
 }

@@ -15,7 +15,6 @@
 .content {
   width: 50%;
   margin-left: 10px;
-  margin-top: 10px;
 }
 .content * {
   text-align: start;
@@ -24,12 +23,15 @@
 .description {
   color: gray;
 }
-.sub-title a {
+a {
   color: gray;
   text-decoration: none;
 }
-.sub-title a:hover {
-  text-decoration: underline;
+a:hover {
+  color: black;
+}
+.description {
+  margin-top: 10px;
 }
 .overlay {
   position: absolute;
@@ -42,6 +44,7 @@
   align-items: center;
   justify-content: center;
   color: white;
+  fill: white;
 }
 .sub-title-item:not(:last-of-type):after {
   content: "•";

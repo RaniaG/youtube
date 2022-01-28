@@ -31,7 +31,12 @@ export function Card({ card }: { card: CardModel }) {
             <span className={styles["sub-title-item"]}>{e}</span>
           ))}
         </div>
-        <div className={styles.description}>{card?.description}</div>
+        <div className={styles.description}>
+          {card?.description}
+          {card?.extraContent && (
+            <div className="m-t-10">{card?.extraContent}</div>
+          )}
+        </div>
       </div>
     </div>
   );
