@@ -31,7 +31,6 @@ export function Card({ card }: { card: CardModel }) {
             <span className={styles["sub-title-item"]}>{e}</span>
           ))}
         </div>
-        {card.channel && <a className={styles.channel}>{card.channel}</a>}
         <div className={styles.description}>{card?.description}</div>
       </div>
     </div>

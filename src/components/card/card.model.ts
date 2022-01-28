@@ -7,5 +7,4 @@ export interface CardModel {
   thumbnails: Thumbnails;
   rounded?: boolean;
   overlay?: string;
-  channel?: string;
 }
