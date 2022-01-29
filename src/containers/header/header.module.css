@@ -4,8 +4,6 @@
   align-items: center;
   justify-content: space-between;
   padding: 10px 5px;
-  width: 70%;
-  margin: 0 auto;
 }
 
 .bigLogo {
@@ -17,21 +15,19 @@
 .bigLogo svg {
   height: 30px;
 }
-.headerContainer {
-  background-color: red;
-}
+/* large screen*/
 @media screen and (min-width: 768px) {
-  .headerContainer {
-    background-color: transparent;
-  }
   .smallLogo {
     display: none;
   }
   .bigLogo {
     display: block;
   }
+  .header {
+    background-color: transparent;
+  }
 }
-
+/* small screen*/
 @media screen and (max-width: 768px) {
   .bigLogo {
     display: none;
@@ -39,10 +35,14 @@
   .smallLogo {
     display: block;
   }
-}
-@media screen and (max-width: 1200px) {
   .header {
-    width: 100%;
-    margin: 0;
+    background-color: red;
   }
+}
+.stickyHeader {
+  position: fixed;
+  top: 0;
+  background-color: white;
+  z-index: 100;
+  width: 100%;
 }

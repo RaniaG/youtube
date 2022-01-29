@@ -1,0 +1,13 @@
+.filtersContainer {
+  margin: 70px 10px 10px 10px;
+}
+.resultsContainer {
+  display: flex;
+  justify-content: space-between;
+}
+.filtersIcon {
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+}
