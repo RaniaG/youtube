@@ -1,0 +1,36 @@
+.searchBox {
+  border: none;
+  font-size: 15px;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid grey;
+}
+.searchBox:active {
+  border: none;
+}
+
+.button {
+  background-color: transparent;
+  border: 1px solid grey;
+  padding: 5px 15px;
+}
+.button:hover {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 768px) {
+  .button {
+    border-color: transparent;
+    fill: white;
+  }
+  .searchContainer {
+    width: 100%;
+  }
+}
+
+.searchContainer {
+  display: flex;
+  align-items: flex-start;
+  width: 80%;
+  justify-content: end;
+}

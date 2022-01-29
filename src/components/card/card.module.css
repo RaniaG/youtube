@@ -1,13 +1,14 @@
 .card {
   display: flex;
   flex-direction: row;
-  min-width: 700px;
 }
 .thumbnail {
   position: relative;
+  max-width: 50%;
 }
 .thumbnail img {
   max-height: 200px;
+  width: 100%;
 }
 .thumbnail.round img {
   border-radius: 50%;
