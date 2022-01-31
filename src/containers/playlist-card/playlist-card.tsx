@@ -3,33 +3,7 @@ import { Card } from "../../components/card/card";
 import { urls } from "../../constants/urls";
 import { PlaylistModel } from "./playlist.model";
 
-export function PlaylistCard() {
-  const data: PlaylistModel = {
-    title: "new ",
-    publishedAt: new Date().toString(),
-    channelId: "channelId",
-    channelTitle: "channel",
-    description: `abc description`,
-    thumbnails: {
-      default: {
-        url: "https://i.ytimg.com/vi/s7ENe1plrbQ/default.jpg",
-        width: 120,
-        height: 90,
-      },
-      medium: {
-        url: "https://i.ytimg.com/vi/s7ENe1plrbQ/mqdefault.jpg",
-        width: 320,
-        height: 180,
-      },
-      high: {
-        url: "https://i.ytimg.com/vi/s7ENe1plrbQ/hqdefault.jpg",
-        width: 480,
-        height: 360,
-      },
-    },
-    numberOfVideos: 20,
-    id: "20ab",
-  };
+export function PlaylistCard({ data }: { data: PlaylistModel }) {
   const card = {
     ...data,
     subTitleArray: [
