@@ -1,0 +1,19 @@
+.loadingContainer {
+  height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+}
+img {
+  min-width: 100px;
+  width: 10%;
+}
+.loading {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: gray;
+}

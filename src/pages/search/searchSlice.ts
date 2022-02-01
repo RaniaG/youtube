@@ -11,7 +11,10 @@ import { SearchResultType } from "../../enums/search-result-type";
 import { PageInfo } from "../../models/search-result";
 import { SearchResultItem } from "../../models/search-result-item";
 import { RootState } from "../../store";
-import { HeaderState } from "../../containers/header/headerSlice";
+import {
+  HeaderState,
+  toggleIsLoading,
+} from "../../containers/header/headerSlice";
 import { Dispatch } from "react";
 
 interface MainSearchResult {
@@ -48,7 +51,8 @@ export const searchThunk = (
   getState: () => RootState
 ) => {
   const state: RootState = getState();
-
+  dispatch(toggleIsLoading(true));
+  dispatch(setItems([]));
   getSearchResults(buildQueryString(state.header))
     .pipe(
       mergeMap((result) =>
@@ -87,6 +91,7 @@ export const searchThunk = (
         })
       );
       dispatch(setItems(result.items));
+      dispatch(toggleIsLoading(false));
     });
 };
 

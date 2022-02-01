@@ -6,12 +6,14 @@ export interface HeaderState {
   searchText: string;
   type: SearchResultType;
   publishedBefore: PublishedBefore;
+  isLoading: boolean;
 }
 
 const initialState: HeaderState = {
   searchText: "",
   type: SearchResultType.All,
   publishedBefore: PublishedBefore.AnyTime,
+  isLoading: false,
 };
 
 export const headerSlice = createSlice({
@@ -27,10 +29,13 @@ export const headerSlice = createSlice({
     setPublishedBefore: (state, action: PayloadAction<PublishedBefore>) => {
       state.publishedBefore = action.payload;
     },
+    toggleIsLoading: (state, action: PayloadAction<boolean>) => {
+      state.isLoading = action.payload;
+    },
   },
 });
 
-export const { setSearchText, setType, setPublishedBefore } =
+export const { setSearchText, setType, setPublishedBefore, toggleIsLoading } =
   headerSlice.actions;
 
 export default headerSlice.reducer;
