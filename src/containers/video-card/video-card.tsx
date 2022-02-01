@@ -2,7 +2,7 @@
 import { Card } from "../../components/card/card";
 import { VideoModel } from "./video.model";
 import { Link } from "react-router-dom";
-import { urls } from "../../constants/urls";
+import { formatter, urls } from "../../constants";
 import moment from "moment";
 
 export function VideoCard({ data }: { data: VideoModel }) {
@@ -12,7 +12,7 @@ export function VideoCard({ data }: { data: VideoModel }) {
       <Link to={`${urls.channel_url}/${data.channelId}`}>
         {data.channelTitle}
       </Link>,
-      `${data.viewsCount} views`,
+      `${formatter.format(data.viewsCount)} views`,
       moment(data.publishedAt).fromNow(),
     ],
   };

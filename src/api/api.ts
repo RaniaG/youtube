@@ -1,6 +1,6 @@
 import axios from "axios";
 import { from, map, Observable, of } from "rxjs";
-import { urls } from "../constants/urls";
+import { urls } from "../constants";
 import { ChannelStatistics } from "../models/channel-statistics";
 import { PlaylistDetails } from "../models/playlist-details";
 import { SearchResult } from "../models/search-result";

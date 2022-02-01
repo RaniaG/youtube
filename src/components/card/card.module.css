@@ -10,8 +10,15 @@
   max-height: 200px;
   width: 100%;
 }
+.thumbnail.round {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+  max-width: 260px;
+}
 .thumbnail.round img {
   border-radius: 50%;
+  width: unset;
 }
 .content {
   width: 50%;
@@ -50,4 +57,17 @@ a:hover {
 .sub-title-item:not(:last-of-type):after {
   content: "•";
   margin: 0 4px;
+}
+
+/* small screen*/
+@media screen and (max-width: 768px) {
+  .description {
+    display: none;
+  }
+  h3 {
+    font-size: 0.8em;
+  }
+  span {
+    font-size: 0.6em;
+  }
 }

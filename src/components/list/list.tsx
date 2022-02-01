@@ -2,7 +2,7 @@ import styles from "./list.module.css";
 
 export function List(props: { listData: any[]; render: any }) {
   return (
-    <div className={styles.list}>
+    <div className={`${styles.list} container`}>
       {props.listData.map((e) => (
         <div className={styles.listItem} key={e.key}>
           {props.render(e)}

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import { Card } from "../../components/card/card";
-import { urls } from "../../constants/urls";
+import { urls } from "../../constants";
 import { PlaylistModel } from "./playlist.model";
 
 export function PlaylistCard({ data }: { data: PlaylistModel }) {

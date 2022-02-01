@@ -1,9 +1,14 @@
 .list {
   display: flex;
   flex-direction: column;
-  width: 70%;
   margin: 0 auto;
 }
 .listItem {
   margin-top: 10px;
+}
+
+@media screen and (max-width: 1200px) {
+  .list {
+    padding: 0 10px;
+  }
 }

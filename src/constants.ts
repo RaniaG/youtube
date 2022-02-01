@@ -5,3 +5,5 @@ export const urls = {
   video: "https://www.googleapis.com/youtube/v3/videos",
   playlist: "https://www.googleapis.com/youtube/v3/playlists",
 };
+
+export const formatter = Intl.NumberFormat("en", { notation: "compact" });
