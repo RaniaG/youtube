@@ -16,6 +16,11 @@ import {
   toggleIsLoading,
 } from "../../containers/header/headerSlice";
 import { Dispatch } from "react";
+import {
+  publishDateMapping,
+  PublishedBefore,
+} from "../../enums/published-before";
+import moment from "moment";
 
 interface MainSearchResult {
   pageInfo: PageInfo | null;
@@ -114,12 +119,24 @@ function getExtraDetails(
     : of();
 }
 
-function buildQueryString({ searchText, type }: HeaderState): string {
+function buildQueryString({
+  searchText,
+  type,
+  publishedBefore,
+}: HeaderState): string {
   if (!searchText) return "";
 
   let query = `q=${searchText.split(" ").join("|")}`;
   if (type && type & (SearchResultType.Channel | SearchResultType.Playlist)) {
     query += `&type=${SearchResultType[type]}`;
+  }
+  if (
+    publishedBefore &&
+    publishedBefore.valueOf() !== PublishedBefore.AnyTime.valueOf()
+  ) {
+    query += `&publishedAfter=${moment().toISOString()}&publishedBefore=${publishDateMapping[
+      publishedBefore
+    ].toISOString()}`;
   }
   return query;
 }
