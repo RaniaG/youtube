@@ -1,22 +1,46 @@
-import { useState } from "react";
+import { useEffect } from "react";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import { Filters } from "../../components/filters/filters";
 import { SearchBox } from "../../components/search-box/search-box";
-import { PublishedBefore } from "../../enums/published-before";
-import { SearchResultType } from "../../enums/search-result-type";
+import { searchThunk } from "../../pages/search/searchSlice";
+import { useAppDispatch, useAppSelector } from "../../store";
 import styles from "./header.module.css";
+import { setPublishedBefore, setSearchText, setType } from "./headerSlice";
 
 export function Header() {
-  function onSearchClick(value: string) {
-    console.log(filters);
-  }
-  const [filters, setFilters] = useState({
-    type: SearchResultType.All,
-    publishedBefore: PublishedBefore.AnyTime,
-  });
+  const searchText = useAppSelector((state) => state.header.searchText);
+  const type = useAppSelector((state) => state.header.type);
+  const navigate = useNavigate();
+  const { search } = useLocation();
+  const [searchParams] = useSearchParams();
 
-  function onFiltersChange(value: string, key: string) {
-    setFilters({ ...filters, [key]: value });
+  const publishedBefore = useAppSelector(
+    (state) => state.header.publishedBefore
+  );
+
+  const dispatch = useAppDispatch();
+
+  function onSearchClick() {
+    if (searchText && searchText.trim().length > 0) {
+      navigate(`/search?query=${searchText}`);
+      dispatch(searchThunk);
+    }
   }
+
+  function onFiltersChange(value: any, key: string) {
+    if (key === "type") dispatch(setType(value));
+    else if (key === "publishedBefore") dispatch(setPublishedBefore(value));
+  }
+
+  useEffect(() => {
+    const searchQuery = searchParams.get("query");
+    if (searchQuery) {
+      console.log(searchQuery);
+      dispatch(setSearchText(searchQuery));
+      dispatch(searchThunk);
+    }
+  }, [search]);
+
   const totalResultCount = 150000;
 
   return (
@@ -55,13 +79,17 @@ export function Header() {
                 <path d="M303 25.9v53.3h-9.4l-1-6.5h-.3c-2.5 4.9-6.4 7.4-11.5 7.4-3.5 0-6.1-1.2-7.8-3.5-1.7-2.3-2.5-5.9-2.5-10.9V25.9h12V65c0 2.4.3 4.1.8 5.1s1.4 1.5 2.6 1.5c1 0 2-.3 3-1 1-.6 1.7-1.4 2.1-2.4V25.9h12zm39.7 8.5c-.7-3.4-1.9-5.8-3.5-7.3s-3.9-2.3-6.7-2.3c-2.2 0-4.3.6-6.2 1.9-1.9 1.2-3.4 2.9-4.4 4.9h-.1V3.5h-11.6v75.7h9.9l1.2-5h.3c.9 1.8 2.3 3.2 4.2 4.3 1.9 1 3.9 1.6 6.2 1.6 4.1 0 7-1.9 8.9-5.6 1.9-3.7 2.9-9.6 2.9-17.5v-8.4c0-6.2-.4-10.8-1.1-14.2zm-11 21.7c0 3.9-.2 6.9-.5 9.1-.3 2.2-.9 3.8-1.6 4.7-.8.9-1.8 1.4-3 1.4-1 0-1.9-.2-2.7-.7-.8-.5-1.5-1.2-2-2.1V38.3c.4-1.4 1.1-2.6 2.1-3.6 1-.9 2.1-1.4 3.2-1.4 1.2 0 2.2.5 2.8 1.4.7 1 1.1 2.6 1.4 4.8.3 2.3.4 5.5.4 9.6l-.1 7zm29.1.4v2.7c0 3.4.1 6 .3 7.7.2 1.7.6 3 1.3 3.7.6.8 1.6 1.2 3 1.2 1.8 0 3-.7 3.7-2.1.7-1.4 1-3.7 1.1-7l10.3.6c.1.5.1 1.1.1 1.9 0 4.9-1.3 8.6-4 11s-6.5 3.6-11.4 3.6c-5.9 0-10-1.9-12.4-5.6-2.4-3.7-3.6-9.4-3.6-17.2v-9.3c0-8 1.2-13.8 3.7-17.5s6.7-5.5 12.6-5.5c4.1 0 7.3.8 9.5 2.3s3.7 3.9 4.6 7c.9 3.2 1.3 7.6 1.3 13.2v9.1h-20.1v.2zm1.5-22.4c-.6.8-1 2-1.2 3.7s-.3 4.3-.3 7.8v3.8h8.8v-3.8c0-3.4-.1-6-.3-7.8-.2-1.8-.7-3-1.3-3.7-.6-.7-1.6-1.1-2.8-1.1-1.3 0-2.3.4-2.9 1.1z"></path>
               </svg>
             </div>
-            <SearchBox onSearch={onSearchClick}></SearchBox>
+            <SearchBox
+              value={searchText}
+              onSearch={onSearchClick}
+              onChange={(value) => dispatch(setSearchText(value))}
+            ></SearchBox>
           </div>
         </div>
       </div>
       <div className="container m-auto">
         <Filters
-          value={filters}
+          value={{ type, publishedBefore }}
           totalResultCount={totalResultCount}
           onChange={onFiltersChange}
         />

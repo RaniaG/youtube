@@ -2,15 +2,22 @@ import { useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import styles from "./search-box.module.css";
 
-export function SearchBox({ onSearch }: { onSearch: (value: string) => void }) {
-  const [value, setValue] = useState("");
+export function SearchBox({
+  value,
+  onSearch,
+  onChange,
+}: {
+  value: string;
+  onSearch: () => void;
+  onChange: (value: string) => void;
+}) {
   const [isVisible, setIsVisible] = useState(false);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
   function onSearchClick() {
     if (isMobile && !isVisible) setIsVisible(true);
     else if ((isMobile && isVisible) || !isMobile) {
       setIsVisible(false);
-      onSearch(value);
+      onSearch();
     }
   }
 
@@ -37,7 +44,7 @@ export function SearchBox({ onSearch }: { onSearch: (value: string) => void }) {
           placeholder="Search"
           className={`${styles.searchBox}`}
           value={value}
-          onChange={(e) => setValue(e.target.value)}
+          onChange={(e) => onChange(e.target.value)}
         />
       )}
       <button className={styles.button} onClick={() => onSearchClick()}>

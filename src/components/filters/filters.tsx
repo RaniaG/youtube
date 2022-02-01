@@ -11,7 +11,7 @@ export function Filters({
 }: {
   value: { type: SearchResultType; publishedBefore: PublishedBefore };
   totalResultCount: number;
-  onChange: (value: string, key: string) => void;
+  onChange: (value: any, key: string) => void;
 }) {
   const [isVisible, setIsVisible] = useState(false);
   const isMobile = useMediaQuery({ query: "(max-width: 768px)" });
