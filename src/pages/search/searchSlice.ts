@@ -18,9 +18,9 @@ import {
 import { Dispatch } from "react";
 
 interface MainSearchResult {
-  pageInfo: PageInfo;
-  nextPageToken: string;
-  prevPageToken: string;
+  pageInfo: PageInfo | null;
+  nextPageToken: string | null;
+  prevPageToken: string | null;
 }
 
 interface SearchState {
@@ -43,6 +43,13 @@ export const searchSlice = createSlice({
     setMain: (state, action: PayloadAction<MainSearchResult>) => {
       state.mainSearchResult = action.payload;
     },
+    resetMain: (state) => {
+      state.mainSearchResult = {
+        pageInfo: null,
+        nextPageToken: null,
+        prevPageToken: null,
+      };
+    },
   },
 });
 
@@ -53,6 +60,8 @@ export const searchThunk = (
   const state: RootState = getState();
   dispatch(toggleIsLoading(true));
   dispatch(setItems([]));
+  dispatch(resetMain());
+
   getSearchResults(buildQueryString(state.header))
     .pipe(
       mergeMap((result) =>
@@ -115,6 +124,6 @@ function buildQueryString({ searchText, type }: HeaderState): string {
   return query;
 }
 
-export const { setItems, setMain } = searchSlice.actions;
+export const { setItems, setMain, resetMain } = searchSlice.actions;
 
 export default searchSlice.reducer;

@@ -10,6 +10,9 @@ import { setPublishedBefore, setSearchText, setType } from "./headerSlice";
 export function Header() {
   const searchText = useAppSelector((state) => state.header.searchText);
   const type = useAppSelector((state) => state.header.type);
+  const totalResultCount = useAppSelector(
+    (state) => state.search.mainSearchResult?.pageInfo?.totalResults
+  );
   const navigate = useNavigate();
   const { search } = useLocation();
   const [searchParams] = useSearchParams();
@@ -35,13 +38,10 @@ export function Header() {
   useEffect(() => {
     const searchQuery = searchParams.get("query");
     if (searchQuery) {
-      console.log(searchQuery);
       dispatch(setSearchText(searchQuery));
       dispatch(searchThunk);
     }
   }, [search]);
-
-  const totalResultCount = 150000;
 
   return (
     <div className={styles.headerContainer}>

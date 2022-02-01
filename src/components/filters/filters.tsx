@@ -10,7 +10,7 @@ export function Filters({
   onChange,
 }: {
   value: { type: SearchResultType; publishedBefore: PublishedBefore };
-  totalResultCount: number;
+  totalResultCount: number | undefined;
   onChange: (value: any, key: string) => void;
 }) {
   const [isVisible, setIsVisible] = useState(false);
@@ -20,7 +20,9 @@ export function Filters({
     <div className={styles.filtersContainer}>
       {!isMobile && (
         <div className={styles.resultsContainer}>
-          <div>About {totalResultCount.toLocaleString()} results</div>
+          {totalResultCount && (
+            <div>About {totalResultCount.toLocaleString()} results</div>
+          )}
           <button
             className={styles.filtersIcon}
             onClick={() => setIsVisible(!isVisible)}
