@@ -21,6 +21,10 @@ export function SearchBox({
     }
   }
 
+  function onKeyPress({ key }: { key: string }) {
+    if (key === "Enter") onSearch();
+  }
+
   return (
     <div className={styles.searchContainer}>
       {isMobile && isVisible && (
@@ -44,6 +48,7 @@ export function SearchBox({
           placeholder="Search"
           className={`${styles.searchBox}`}
           value={value}
+          onKeyPress={(e) => onKeyPress(e)}
           onChange={(e) => onChange(e.target.value)}
         />
       )}
