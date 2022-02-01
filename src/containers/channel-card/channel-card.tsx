@@ -1,5 +1,5 @@
 import { Card } from "../../components/card/card";
-import { formatter } from "../../constants";
+import { formatter, urls } from "../../constants";
 import { ChannelModel } from "./channel.model";
 
 export function ChannelCard({ data }: { data: ChannelModel }) {
@@ -10,7 +10,7 @@ export function ChannelCard({ data }: { data: ChannelModel }) {
   };
   return (
     <>
-      <Card card={card}></Card>
+      <Card card={card} url={urls.channel_redirect_url}></Card>
     </>
   );
 }

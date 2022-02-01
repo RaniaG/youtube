@@ -51,7 +51,7 @@ function createVideo(item: SearchResultItem) {
     ...item?.snippet,
     duration: (item.extra as VideoDetails).duration,
     viewsCount: (item.extra as VideoDetails).statistics.viewCount,
-    id: item?.id?.playlistId,
+    id: item?.id?.videoId,
   };
   return <VideoCard data={data} />;
 }

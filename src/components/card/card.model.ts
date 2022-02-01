@@ -9,4 +9,5 @@ export interface CardModel {
   rounded?: boolean;
   overlay?: ReactElement;
   extraContent?: ReactElement;
+  id: string | undefined;
 }
