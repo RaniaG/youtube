@@ -6,7 +6,7 @@ import { PlaylistDetails } from "../models/playlist-details";
 import { SearchResult } from "../models/search-result";
 import { VideoDetails } from "../models/video-details";
 
-export const API_KEY = "AIzaSyCqNkUgk4PasiBNxWYpl5WiuhOAXo9r8nY";
+export const API_KEY = "AIzaSyCY4-uRYPHnu27w-ZmSEYXp1oP4GncUIgg";
 
 export function getChannelStatistics(
   channelId: string
