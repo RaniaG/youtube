@@ -21,6 +21,7 @@ import {
   PublishedBefore,
 } from "../../enums/published-before";
 import moment from "moment";
+import { resetError, setError } from "../../errorSlice";
 
 interface MainSearchResult {
   pageInfo: PageInfo | null;
@@ -66,6 +67,7 @@ export const searchThunk = (
   dispatch(toggleIsLoading(true));
   dispatch(setItems([]));
   dispatch(resetMain());
+  dispatch(resetError());
 
   getSearchResults(buildQueryString(state.header))
     .pipe(
@@ -95,18 +97,27 @@ export const searchThunk = (
         )
       )
     )
-    .subscribe((result) => {
-      const { pageInfo, nextPageToken, prevPageToken } = result;
-      dispatch(
-        setMain({
-          pageInfo,
-          nextPageToken,
-          prevPageToken,
-        })
-      );
-      dispatch(setItems(result.items));
-      dispatch(toggleIsLoading(false));
-    });
+    .subscribe(
+      (result) => {
+        const { pageInfo, nextPageToken, prevPageToken } = result;
+        dispatch(
+          setMain({
+            pageInfo,
+            nextPageToken,
+            prevPageToken,
+          })
+        );
+        dispatch(setItems(result.items));
+        dispatch(toggleIsLoading(false));
+      },
+      (error) => {
+        dispatch(toggleIsLoading(false));
+        dispatch(
+          setError("Failed to retrieve search results. try again later")
+        );
+        console.log(error);
+      }
+    );
 };
 
 function getExtraDetails(

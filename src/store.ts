@@ -1,6 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 import headerReducer from "./containers/header/headerSlice";
 import searchReducer from "./pages/search/searchSlice";
+import errorReducer from "./errorSlice";
+
 import { useDispatch, useSelector, TypedUseSelectorHook } from "react-redux";
 import thunk from "redux-thunk";
 
@@ -8,6 +10,7 @@ export const store = configureStore({
   reducer: {
     header: headerReducer,
     search: searchReducer,
+    error: errorReducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(thunk),
 });
